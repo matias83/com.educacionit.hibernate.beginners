@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.educacionit.hibernate.beginners.entity.EmployeeAnnotation;
+import com.educacionit.hibernate.beginners.entity.CompanyAnnotation;
 
 
 public final class HibernateUtil {
@@ -94,6 +95,7 @@ public final class HibernateUtil {
 		
 		    configuration.setProperties (props);
 		    configuration.addAnnotatedClass (EmployeeAnnotation.class);
+            configuration.addAnnotatedClass (CompanyAnnotation.class);
 		
 		    ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder ().
                     applySettings (configuration.getProperties ()).build ();
