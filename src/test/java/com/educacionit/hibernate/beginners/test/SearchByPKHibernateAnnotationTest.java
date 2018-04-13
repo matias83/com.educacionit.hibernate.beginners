@@ -8,28 +8,28 @@ import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-
 import org.hibernate.criterion.Restrictions;
-import org.junit.jupiter.api.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import org.junit.jupiter.api.*;
 
 import com.educacionit.hibernate.beginners.entity.CompanyAnnotation;
 import com.educacionit.hibernate.beginners.util.HibernateUtil;
 
 
-public class BasicSearchHibernateAnnotationTest {
+public class SearchByPKHibernateAnnotationTest {
 
 
     private static int PK;
 
     private static SessionFactory sessionFactory;
 
-    private static final Logger logger = LoggerFactory.getLogger (BasicSearchHibernateAnnotationTest.class);
+    private static final Logger logger = LoggerFactory.getLogger (SearchByPKHibernateAnnotationTest.class);
 
 
-    public BasicSearchHibernateAnnotationTest () {
+    public SearchByPKHibernateAnnotationTest() {
 
         super ();
     }
