@@ -2,14 +2,23 @@
 package com.educacionit.hibernate.beginners.entity;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
+@NamedQueries ({
+
+    @NamedQuery(
+        name  = "findCountryByName",
+        query = "from Country c where c.name like :name"
+    )
+})
+@NamedNativeQueries({
+    @NamedNativeQuery(
+        name = "findCountryByNameNative",
+        query = "select c.* from country c where c.cou_name ilike :name",
+        resultClass = CountryAnnotation.class
+    )
+})
 @Entity (name =  "Country")
 @Table (name = "country")
 public class CountryAnnotation {

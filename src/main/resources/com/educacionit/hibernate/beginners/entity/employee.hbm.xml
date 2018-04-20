@@ -20,4 +20,13 @@
         </property>
     </class>
 
+    <query name="findCount">
+        <![CDATA[select count(e.name) from EmployeeXML e]]>
+    </query>
+
+    <sql-query name="findCountNative">
+        <return alias="employee" class="com.educacionit.hibernate.beginners.entity.EmployeeXML" />
+        <![CDATA[select e.* from employee e]]>
+    </sql-query>
+
 </hibernate-mapping>
