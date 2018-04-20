@@ -17,6 +17,7 @@
 
         <mapping class="com.educacionit.hibernate.beginners.entity.EmployeeAnnotation"/>
         <mapping class="com.educacionit.hibernate.beginners.entity.CompanyAnnotation"/>
+        <mapping class="com.educacionit.hibernate.beginners.entity.CountryAnnotation"/>
 
 	</session-factory>
 

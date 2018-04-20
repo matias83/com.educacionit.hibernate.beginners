@@ -139,6 +139,7 @@ public class HibernateJavaTest {
                 e.setName (e.getName ().toUpperCase ());
                 session.save (e);
             });
+            tx.commit ();
 
             Assertions.assertFalse (employees.isEmpty (), "There are not employees found!!!");
 

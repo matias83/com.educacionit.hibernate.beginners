@@ -20,6 +20,18 @@ CACHE 1;
 ALTER SEQUENCE public.company_seq
 OWNER TO postgres;
 
+CREATE SEQUENCE public.country_seq
+INCREMENT 1
+START 1
+MINVALUE 1
+MAXVALUE 9223372036854775807
+CACHE 1;
+
+ALTER SEQUENCE public.country_seq
+OWNER TO postgres;
+
+
+
 -- Table: public.employee
 
 -- DROP TABLE public.employee;
@@ -40,6 +52,8 @@ TABLESPACE pg_default;
 ALTER TABLE public.employee
   OWNER to postgres;
 
+
+
 -- Table: public.company
 
 -- DROP TABLE public.company;
@@ -58,4 +72,25 @@ OIDS = FALSE
 TABLESPACE pg_default;
 
 ALTER TABLE public.company
+  OWNER to postgres;
+
+
+
+-- Table: public.country
+
+-- DROP TABLE public.country;
+
+CREATE TABLE public.country
+(
+  cou_id integer NOT NULL DEFAULT nextval('country_seq'::regclass),
+  cou_code character varying(10) COLLATE pg_catalog."default" NOT NULL,
+  cou_name character varying(128) COLLATE pg_catalog."default" NOT NULL,
+  CONSTRAINT country_pkey PRIMARY KEY (cou_id)
+)
+WITH (
+OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.country
   OWNER to postgres;
