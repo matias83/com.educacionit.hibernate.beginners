@@ -24,6 +24,8 @@ public final class HibernateUtil {
 
     private static SessionFactory sessionJavaConfigFactory;
 
+    private static SessionFactory sessionHierarchyConfigFactory;
+
     private static final Logger logger = LoggerFactory.getLogger (HibernateUtil.class);
 
 
@@ -112,6 +114,29 @@ public final class HibernateUtil {
         }
 	}
 
+    private static SessionFactory buildSessionHierarchyAnnotationFactory () {
+
+        try {
+
+            Configuration configuration = new Configuration ();
+            configuration.configure ("hibernate-heirarchy.cfg.xml");
+            logger.debug ("Hibernate Hierarchy Annotation Configuration loaded...");
+
+            ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder ().
+                    applySettings (configuration.getProperties ()).build ();
+            logger.debug ("Hibernate Hierarchy Annotation serviceRegistry created...");
+
+            SessionFactory sessionFactory = configuration.buildSessionFactory (serviceRegistry);
+
+            return sessionFactory;
+        }
+        catch (Throwable ex) {
+
+            logger.error ("Initial Hierarchy SessionFactory creation failed.", ex);
+            throw new ExceptionInInitializerError (ex);
+        }
+    }
+
 
 
 	public static SessionFactory getSessionFactory () {
@@ -130,5 +155,11 @@ public final class HibernateUtil {
 
         if (sessionJavaConfigFactory == null) { sessionJavaConfigFactory = buildSessionJavaConfigFactory (); }
         return sessionJavaConfigFactory;
+    }
+
+    public static SessionFactory getSessionHierarchyConfigFactory () {
+
+        if (sessionHierarchyConfigFactory == null) { sessionHierarchyConfigFactory = buildSessionHierarchyAnnotationFactory (); }
+        return sessionHierarchyConfigFactory;
     }
 }

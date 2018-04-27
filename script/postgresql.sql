@@ -30,6 +30,46 @@ CACHE 1;
 ALTER SEQUENCE public.country_seq
 OWNER TO postgres;
 
+CREATE SEQUENCE public.sq_entity
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
+    CACHE 1;
+
+ALTER SEQUENCE public.sq_entity
+    OWNER TO postgres;
+
+CREATE SEQUENCE public.sq_person
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
+    CACHE 1;
+
+ALTER SEQUENCE public.sq_person
+    OWNER TO postgres;
+
+CREATE SEQUENCE public.sq_employee
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
+    CACHE 1;
+
+ALTER SEQUENCE public.sq_employee
+    OWNER TO postgres;
+
+CREATE SEQUENCE public.sq_owner
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
+    CACHE 1;
+
+ALTER SEQUENCE public.sq_owner
+    OWNER TO postgres;
+
 
 
 -- Table: public.employee
@@ -94,3 +134,94 @@ TABLESPACE pg_default;
 
 ALTER TABLE public.country
   OWNER to postgres;
+
+
+
+-- Table: public.entity
+
+-- DROP TABLE public.entity;
+
+CREATE TABLE public.entity
+(
+    ent_id integer NOT NULL,
+    ent_first_name character varying(50) COLLATE pg_catalog."default",
+    ent_last_name character varying(50) COLLATE pg_catalog."default",
+    ent_joining_date timestamp without time zone,
+    ent_department_name character varying(100) COLLATE pg_catalog."default",
+    ent_discriminator character varying(20) COLLATE pg_catalog."default",
+    CONSTRAINT entity_pkey PRIMARY KEY (ent_id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.ENTITY
+    OWNER to postgres;
+
+
+
+-- Table: public.person
+
+-- DROP TABLE public.person;
+
+CREATE TABLE public.person
+(
+    per_person_id integer NOT NULL,
+    per_first_name character varying(50) COLLATE pg_catalog."default",
+    per_last_name character varying(50) COLLATE pg_catalog."default",
+    CONSTRAINT person_pkey PRIMARY KEY (per_person_id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.person
+    OWNER to postgres;
+
+
+
+-- Table: public.employee
+
+-- DROP TABLE public.employee;
+
+CREATE TABLE public.employee
+(
+    per_person_id integer NOT NULL,
+    per_first_name character varying(50) COLLATE pg_catalog."default",
+    per_last_name character varying(50) COLLATE pg_catalog."default",
+    joining_date timestamp without time zone,
+	  department_name character varying(50),
+    CONSTRAINT employee_pkey PRIMARY KEY (per_person_id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.employee
+    OWNER to postgres;
+
+
+
+-- Table: public.owner
+
+-- DROP TABLE public.owner;
+
+CREATE TABLE public.owner
+(
+    per_person_id integer NOT NULL,
+    per_first_name character varying(50) COLLATE pg_catalog."default",
+    per_last_name character varying(50) COLLATE pg_catalog."default",
+    stocks integer,
+	  partnership_stake integer,
+    CONSTRAINT owner_pkey PRIMARY KEY (per_person_id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.owner
+    OWNER to postgres;
