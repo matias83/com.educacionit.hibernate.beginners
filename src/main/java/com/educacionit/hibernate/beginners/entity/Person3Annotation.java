@@ -5,14 +5,14 @@ package com.educacionit.hibernate.beginners.entity;
 import javax.persistence.*;
 
 
-@Entity (name = "Person2")
-@Table (name = "person")
-@Inheritance (strategy = InheritanceType.TABLE_PER_CLASS)
-public class Person2Annotation {
+@Entity (name = "Person3")
+@Table (name = "person3")
+@Inheritance (strategy=InheritanceType.JOINED)
+public class Person3Annotation {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.AUTO, generator = "sq_person")
-    @SequenceGenerator (name="sq_person", sequenceName="sq_person")
+    @GeneratedValue (strategy = GenerationType.AUTO, generator = "sq_person3")
+    @SequenceGenerator (name="sq_person3", sequenceName="sq_person3")
     @Column(name = "per_person_id")
     private Long personId;
 
@@ -23,13 +23,13 @@ public class Person2Annotation {
     private String lastName;
 
 
-    public Person2Annotation () {
+    public Person3Annotation () {
 
         super ();
 
     }
 
-    public Person2Annotation (String firstName, String lastName) {
+    public Person3Annotation (String firstName, String lastName) {
 
         super ();
 

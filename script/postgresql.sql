@@ -50,6 +50,16 @@ CREATE SEQUENCE public.sq_person
 ALTER SEQUENCE public.sq_person
     OWNER TO postgres;
 
+CREATE SEQUENCE public.sq_person3
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
+    CACHE 1;
+
+ALTER SEQUENCE public.sq_person3
+    OWNER TO postgres;
+
 CREATE SEQUENCE public.sq_employee
     INCREMENT 1
     START 1
@@ -60,6 +70,16 @@ CREATE SEQUENCE public.sq_employee
 ALTER SEQUENCE public.sq_employee
     OWNER TO postgres;
 
+CREATE SEQUENCE public.sq_employee3
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
+    CACHE 1;
+
+ALTER SEQUENCE public.sq_employee3
+    OWNER TO postgres;
+
 CREATE SEQUENCE public.sq_owner
     INCREMENT 1
     START 1
@@ -68,6 +88,16 @@ CREATE SEQUENCE public.sq_owner
     CACHE 1;
 
 ALTER SEQUENCE public.sq_owner
+    OWNER TO postgres;
+
+CREATE SEQUENCE public.sq_owner2
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
+    CACHE 1;
+
+ALTER SEQUENCE public.sq_owner2
     OWNER TO postgres;
 
 
@@ -182,6 +212,27 @@ ALTER TABLE public.person
 
 
 
+-- Table: public.person3
+
+-- DROP TABLE public.person3;
+
+CREATE TABLE public.person3
+(
+    per_person_id integer NOT NULL,
+    per_first_name character varying(50) COLLATE pg_catalog."default",
+    per_last_name character varying(50) COLLATE pg_catalog."default",
+    CONSTRAINT person_pkey3 PRIMARY KEY (per_person_id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.person3
+    OWNER to postgres;
+
+
+
 -- Table: public.employee
 
 -- DROP TABLE public.employee;
@@ -205,6 +256,27 @@ ALTER TABLE public.employee
 
 
 
+-- Table: public.employee3
+
+-- DROP TABLE public.employee3;
+
+CREATE TABLE public.employee3
+(
+    per_person_id integer NOT NULL,
+    joining_date timestamp without time zone,
+	  department_name character varying(50),
+    CONSTRAINT employee_pkey3 PRIMARY KEY (per_person_id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.employee3
+    OWNER to postgres;
+
+
+
 -- Table: public.owner
 
 -- DROP TABLE public.owner;
@@ -224,4 +296,25 @@ WITH (
 TABLESPACE pg_default;
 
 ALTER TABLE public.owner
+    OWNER to postgres;
+
+
+
+-- Table: public.owner2
+
+-- DROP TABLE public.owner2;
+
+CREATE TABLE public.owner2
+(
+    per_person_id integer NOT NULL,
+    stocks integer,
+	  partnership_stake integer,
+    CONSTRAINT owner_pkey2 PRIMARY KEY (per_person_id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.owner2
     OWNER to postgres;

@@ -2,18 +2,14 @@
 package com.educacionit.hibernate.beginners.entity;
 
 
+import javax.persistence.*;
 import java.util.Date;
 
-import javax.persistence.*;
 
-
-@Entity (name = "Employee2")
-@Table (name="employee")
-@AttributeOverrides ({
-        @AttributeOverride (name = "firstName", column = @Column (name = "per_first_name")),
-        @AttributeOverride (name = "lastName",  column = @Column (name = "per_last_name"))
-})
-public class Employee2Annotation extends Person2Annotation {
+@Entity (name = "Employee3")
+@Table (name="employee3")
+@PrimaryKeyJoinColumn (name="per_person_id")
+public class Employee3Annotation extends Person3Annotation {
 
 
     @Column (name="joining_date")
@@ -23,12 +19,12 @@ public class Employee2Annotation extends Person2Annotation {
     private String departmentName;
 
 
-    public Employee2Annotation () {
+    public Employee3Annotation () {
 
         super ();
     }
 
-    public Employee2Annotation (String firstName, String lastName, String departmentName,
+    public Employee3Annotation (String firstName, String lastName, String departmentName,
                                 Date joiningDate) {
 
         super (firstName, lastName);

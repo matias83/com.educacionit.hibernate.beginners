@@ -5,13 +5,10 @@ package com.educacionit.hibernate.beginners.entity;
 import javax.persistence.*;
 
 
-@Entity (name = "Owner")
-@Table (name="owner")
-@AttributeOverrides ({
-        @AttributeOverride (name = "firstName", column = @Column (name="per_first_name")),
-        @AttributeOverride (name = "lastName",  column = @Column (name="per_last_name"))
-})
-public class OwnerAnnotation extends Person2Annotation {
+@Entity (name = "Owner2")
+@Table (name="owner2")
+@PrimaryKeyJoinColumn (name="per_person_id")
+public class Owner2Annotation extends Person3Annotation {
 
 
     @Column (name="stocks")
@@ -20,13 +17,13 @@ public class OwnerAnnotation extends Person2Annotation {
     @Column (name="partnership_stake")
     private Integer partnershipStake;
 
-    public OwnerAnnotation () {
+    public Owner2Annotation () {
 
         super ();
     }
 
-    public OwnerAnnotation (String firstName, String lastName, Integer stocks,
-                            Integer partnershipStake) {
+    public Owner2Annotation (String firstName, String lastName, Integer stocks,
+                             Integer partnershipStake) {
 
         super (firstName, lastName);
 

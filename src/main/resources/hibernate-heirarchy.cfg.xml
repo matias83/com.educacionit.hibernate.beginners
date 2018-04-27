@@ -18,8 +18,11 @@
         <mapping class="com.educacionit.hibernate.beginners.entity.PersonAnnotation" />
         <mapping class="com.educacionit.hibernate.beginners.entity.WorkerAnnotation" />
         <mapping class="com.educacionit.hibernate.beginners.entity.Person2Annotation" />
+        <mapping class="com.educacionit.hibernate.beginners.entity.Person3Annotation" />
         <mapping class="com.educacionit.hibernate.beginners.entity.Employee2Annotation" />
-        <mapping class="com.educacionit.hibernate.beginners.entity.OwnerAnnotation" />
+        <mapping class="com.educacionit.hibernate.beginners.entity.Employee3Annotation" />
+        <mapping class="com.educacionit.hibernate.beginners.entity.OwnerAnnotation"  />
+        <mapping class="com.educacionit.hibernate.beginners.entity.Owner2Annotation" />
 
     </session-factory>
 

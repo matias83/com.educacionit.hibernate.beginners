@@ -14,21 +14,21 @@ import org.slf4j.LoggerFactory;
 
 import org.junit.jupiter.api.*;
 
-import com.educacionit.hibernate.beginners.entity.Person2Annotation;
-import com.educacionit.hibernate.beginners.entity.Employee2Annotation;
-import com.educacionit.hibernate.beginners.entity.OwnerAnnotation;
+import com.educacionit.hibernate.beginners.entity.Employee3Annotation;
+import com.educacionit.hibernate.beginners.entity.Owner2Annotation;
+import com.educacionit.hibernate.beginners.entity.Person3Annotation;
 import com.educacionit.hibernate.beginners.util.HibernateUtil;
 
 
-public class HibernateHierarchy2AnnotationTest {
+public class HibernateHierarchy3AnnotationTest {
 
 
     private static SessionFactory sessionFactory;
 
-    private static final Logger logger = LoggerFactory.getLogger (HibernateHierarchy2AnnotationTest.class);
+    private static final Logger logger = LoggerFactory.getLogger (HibernateHierarchy3AnnotationTest.class);
 
 
-    public HibernateHierarchy2AnnotationTest () {
+    public HibernateHierarchy3AnnotationTest () {
 
         super ();
     }
@@ -48,7 +48,7 @@ public class HibernateHierarchy2AnnotationTest {
 
 
     @Test
-    @DisplayName ("Create New Objects [Person2, Employee2, Owner]")
+    @DisplayName ("Create New Objects [Person3, Employee3, Owner2]")
     public void m1 () {
 
 
@@ -62,25 +62,25 @@ public class HibernateHierarchy2AnnotationTest {
             tx = session.beginTransaction ();
 
             // Set the data to save.
-            logger.info("Creating new person 2...");
-            Person2Annotation person2 = new Person2Annotation ("Homer", "Simpson");
-            session.save (person2);
+            logger.info("Creating new person 3...");
+            Person3Annotation person3 = new Person3Annotation ("Homer", "Simpson");
+            session.save (person3);
 
-            logger.info ("Creating new employee 2...");
-            Employee2Annotation employee2 = new Employee2Annotation ("Bart", "Simpson", "IT",
+            logger.info ("Creating new employee 3...");
+            Employee3Annotation employee3 = new Employee3Annotation ("Bart", "Simpson", "IT",
                                                                      new Date ());
-            session.save (employee2);
+            session.save (employee3);
 
-            logger.info ("Creating new owner...");
-            OwnerAnnotation owner = new OwnerAnnotation ("Lisa", "Simpson", 1,
-                                                         1);
-            session.save (owner);
+            logger.info ("Creating new owner 2...");
+            Owner2Annotation owner2 = new Owner2Annotation ("Lisa", "Simpson", 1,
+                                                            1);
+            session.save (owner2);
 
             tx.commit ();
 
-            Assertions.assertTrue (person2.getPersonId () > 0, String.format ("Problems creating the new person 2 %s", person2.getFirstName ()));
-            Assertions.assertTrue (employee2.getPersonId () > 0, String.format ("Problems creating the new employee 2 %s", employee2.getFirstName ()));
-            Assertions.assertTrue (owner.getPersonId () > 0, String.format ("Problems creating the new owner %s", owner.getFirstName ()));
+            Assertions.assertTrue (person3.getPersonId () > 0, String.format ("Problems creating the new person 3 %s", person3.getFirstName ()));
+            Assertions.assertTrue (employee3.getPersonId () > 0, String.format ("Problems creating the new employee 3 %s", employee3.getFirstName ()));
+            Assertions.assertTrue (owner2.getPersonId () > 0, String.format ("Problems creating the new owner 2 %s", owner2.getFirstName ()));
 
         } catch (Exception ex) {
 
@@ -92,23 +92,23 @@ public class HibernateHierarchy2AnnotationTest {
     }
 
     @Test
-    @DisplayName ("Finding all persons 2")
+    @DisplayName ("Finding all persons 3")
     public void m2 () {
 
         Session session = null;
-        List<Person2Annotation> persons;
+        List<Person3Annotation> persons;
 
         try {
 
-            logger.info ("Executing select all persons 2.");
+            logger.info ("Executing select all persons 3.");
             logger.info("Getting a session...");
             session = sessionFactory.openSession ();
 
-            persons = (List)session.createCriteria (Person2Annotation.class).list ();
+            persons = (List)session.createCriteria (Person3Annotation.class).list ();
 
-            Assertions.assertFalse (persons.isEmpty (), "There are not persons 2 found!!!");
+            Assertions.assertFalse (persons.isEmpty (), "There are not persons 3 found!!!");
 
-            logger.info ("Print all persons 2 info.");
+            logger.info ("Print all persons 3 info.");
             persons.forEach ( e -> logger.info (e.getFirstName ()));
 
         } catch (Exception e) {
@@ -120,23 +120,23 @@ public class HibernateHierarchy2AnnotationTest {
     }
 
     @Test
-    @DisplayName ("Finding all employees 2")
+    @DisplayName ("Finding all employees 3")
     public void m3 () {
 
         Session session = null;
-        List<Employee2Annotation> employlees2;
+        List<Employee3Annotation> employlees2;
 
         try {
 
-            logger.info ("Executing select all employees 2.");
+            logger.info ("Executing select all employees 3.");
             logger.info("Getting a session...");
             session = sessionFactory.openSession ();
 
-            employlees2 = (List)session.createCriteria (Employee2Annotation.class).list ();
+            employlees2 = (List)session.createCriteria (Employee3Annotation.class).list ();
 
-            Assertions.assertFalse (employlees2.isEmpty (), "There are not employees 2 found!!!");
+            Assertions.assertFalse (employlees2.isEmpty (), "There are not employees 3 found!!!");
 
-            logger.info ("Print all employees 2 info.");
+            logger.info ("Print all employees 3 info.");
             employlees2.forEach ( e -> logger.info (e.getFirstName ()));
 
         } catch (Exception e) {
@@ -148,23 +148,23 @@ public class HibernateHierarchy2AnnotationTest {
     }
 
     @Test
-    @DisplayName ("Finding all owners")
+    @DisplayName ("Finding all owners 2")
     public void m4 () {
 
         Session session = null;
-        List<OwnerAnnotation> owners;
+        List<Owner2Annotation> owners;
 
         try {
 
-            logger.info ("Executing select all owners.");
+            logger.info ("Executing select all owners 2.");
             logger.info("Getting a session...");
             session = sessionFactory.openSession ();
 
-            owners = (List)session.createCriteria (OwnerAnnotation.class).list ();
+            owners = (List)session.createCriteria (Owner2Annotation.class).list ();
 
-            Assertions.assertFalse (owners.isEmpty (), "There are not owners found!!!");
+            Assertions.assertFalse (owners.isEmpty (), "There are not owners 2 found!!!");
 
-            logger.info ("Print all owners info.");
+            logger.info ("Print all owners 2 info.");
             owners.forEach ( e -> logger.info (e.getFirstName ()));
 
         } catch (Exception e) {
@@ -176,25 +176,25 @@ public class HibernateHierarchy2AnnotationTest {
     }
 
     @Test
-    @DisplayName ("Delete all owners")
+    @DisplayName ("Delete all owners 2")
     public void m5 () {
 
         final Session session;
         Transaction tx = null;
-        List<OwnerAnnotation> values;
+        List<Owner2Annotation> values;
 
         try {
 
-            logger.debug ("Delete all owners.");
+            logger.debug ("Delete all owners 2.");
             session = sessionFactory.openSession ();
             tx = session.beginTransaction ();
-            values = (List)session.createQuery ("From Owner").list ();
+            values = (List)session.createQuery ("From Owner2").list ();
 
             values.forEach (e -> session.delete (e));
             tx.commit ();
 
-            values = (List)session.createQuery("From Owner").list ();
-            Assertions.assertTrue (values.isEmpty (), "There are owners found!!!");
+            values = (List)session.createQuery("From Owner2").list ();
+            Assertions.assertTrue (values.isEmpty (), "There are owners 2 found!!!");
 
         } catch (Exception e) {
 
@@ -205,25 +205,25 @@ public class HibernateHierarchy2AnnotationTest {
     }
 
     @Test
-    @DisplayName ("Delete all employees 2")
+    @DisplayName ("Delete all employees 3")
     public void m6 () {
 
         final Session session;
         Transaction tx = null;
-        List<Employee2Annotation> values;
+        List<Employee3Annotation> values;
 
         try {
 
-            logger.debug ("Delete all employees 2.");
+            logger.debug ("Delete all employees 3.");
             session = sessionFactory.openSession ();
             tx = session.beginTransaction ();
-            values = (List)session.createQuery ("From Employee2").list ();
+            values = (List)session.createQuery ("From Employee3").list ();
 
             values.forEach (e -> session.delete (e));
             tx.commit ();
 
-            values = (List)session.createQuery("From Employee2").list ();
-            Assertions.assertTrue (values.isEmpty (), "There are employees 2 found!!!");
+            values = (List)session.createQuery("From Employee3").list ();
+            Assertions.assertTrue (values.isEmpty (), "There are employees 3 found!!!");
 
         } catch (Exception e) {
 
@@ -234,25 +234,25 @@ public class HibernateHierarchy2AnnotationTest {
     }
 
     @Test
-    @DisplayName ("Delete all persons 2")
+    @DisplayName ("Delete all persons 3")
     public void m7 () {
 
         final Session session;
         Transaction tx = null;
-        List<Person2Annotation> values;
+        List<Person3Annotation> values;
 
         try {
 
-            logger.debug ("Delete all persons 2.");
+            logger.debug ("Delete all persons 3.");
             session = sessionFactory.openSession ();
             tx = session.beginTransaction ();
-            values = (List)session.createQuery ("From Person2").list ();
+            values = (List)session.createQuery ("From Person3").list ();
 
             values.forEach (e -> session.delete (e));
             tx.commit ();
 
-            values = (List)session.createQuery("From Person2").list ();
-            Assertions.assertTrue (values.isEmpty (), "There are persons 2 found!!!");
+            values = (List)session.createQuery("From Person3").list ();
+            Assertions.assertTrue (values.isEmpty (), "There are persons 3 found!!!");
 
         } catch (Exception e) {
 
