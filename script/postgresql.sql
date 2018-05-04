@@ -1,5 +1,15 @@
 -- Postgresql 9.6
 
+CREATE SEQUENCE public.category_seq
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
+    CACHE 1;
+
+ALTER SEQUENCE public.category_seq
+    OWNER TO postgres;
+
 CREATE SEQUENCE public.meeting_seq
     INCREMENT 1
     START 1
@@ -497,4 +507,30 @@ WITH (
 TABLESPACE pg_default;
 
 ALTER TABLE public.student_meeting
+    OWNER to postgres;
+
+
+
+-- Table: public.category
+
+-- DROP TABLE public.category;
+
+CREATE TABLE public.category
+(
+    cat_id integer NOT NULL,
+    cat_name character varying(48) COLLATE pg_catalog."default" NOT NULL,
+    cat_description character varying(200) COLLATE pg_catalog."default" NOT NULL,
+    cat_parent integer,
+    CONSTRAINT category_pkey PRIMARY KEY (cat_id),
+    CONSTRAINT fkcat FOREIGN KEY (cat_parent)
+        REFERENCES public.category (cat_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.category
     OWNER to postgres;
