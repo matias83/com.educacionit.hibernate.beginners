@@ -1,5 +1,25 @@
 -- Postgresql 9.6
 
+CREATE SEQUENCE public.product_detail_seq
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
+    CACHE 1;
+
+ALTER SEQUENCE public.product_detail_seq
+    OWNER TO postgres;
+
+CREATE SEQUENCE public.product_seq
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
+    CACHE 1;
+
+ALTER SEQUENCE public.product_seq
+    OWNER TO postgres;
+
 CREATE SEQUENCE public.employee_seq
 INCREMENT 1
 START 1
@@ -317,4 +337,47 @@ WITH (
 TABLESPACE pg_default;
 
 ALTER TABLE public.owner2
+    OWNER to postgres;
+
+
+
+-- Table: public.product
+
+-- DROP TABLE public.product;
+
+CREATE TABLE public.product
+(
+    pro_id integer NOT NULL,
+    pro_name character varying(48) COLLATE pg_catalog."default" NOT NULL,
+    pro_description character varying(200) COLLATE pg_catalog."default" NOT NULL,
+    pro_price integer NOT NULL,
+    CONSTRAINT product_pkey PRIMARY KEY (pro_id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.product
+    OWNER to postgres;
+
+-- Table: public.product_detail
+
+-- DROP TABLE public.product_detail;
+
+CREATE TABLE public.product_detail
+(
+    prod_id integer NOT NULL,
+    prod_tax integer NOT NULL,
+    prod_in time with time zone NOT NULL,
+    prod_out time with time zone,
+    prod_observation character varying (200) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT product_detail_pkey PRIMARY KEY (prod_id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.product_detail
     OWNER to postgres;
