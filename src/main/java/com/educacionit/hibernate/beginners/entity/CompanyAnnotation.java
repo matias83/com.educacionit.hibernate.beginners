@@ -11,7 +11,8 @@ public class CompanyAnnotation {
 
 
 	@Id
-	@GeneratedValue (strategy=GenerationType.IDENTITY)
+	@GeneratedValue (strategy = GenerationType.AUTO, generator = "company_seq")
+	@SequenceGenerator (name="company_seq", sequenceName="company_seq")
 	@Column (name="com_id", nullable=false, unique=true)
 	private int id;
 
