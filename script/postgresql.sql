@@ -1,5 +1,25 @@
 -- Postgresql 9.6
 
+CREATE SEQUENCE public.meeting_seq
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
+    CACHE 1;
+
+ALTER SEQUENCE public.meeting_seq
+    OWNER TO postgres;
+
+CREATE SEQUENCE public.student_seq
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
+    CACHE 1;
+
+ALTER SEQUENCE public.student_seq
+    OWNER TO postgres;
+
 CREATE SEQUENCE public.product_type_seq
     INCREMENT 1
     START 1
@@ -407,4 +427,74 @@ WITH (
 TABLESPACE pg_default;
 
 ALTER TABLE public.product_type
+    OWNER to postgres;
+
+
+
+-- Table: public.student
+
+-- DROP TABLE public.student;
+
+CREATE TABLE public.student
+(
+    st_id integer NOT NULL,
+    st_name character varying(48) COLLATE pg_catalog."default" NOT NULL,
+    st_last_name character varying(48) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT student_pkey PRIMARY KEY (st_id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.student
+    OWNER to postgres;
+
+
+
+-- Table: public.meeting
+
+-- DROP TABLE public.meeting;
+
+CREATE TABLE public.meeting
+(
+    mit_id integer NOT NULL,
+    mit_subject character varying(128) COLLATE pg_catalog."default" NOT NULL,
+    mit_date time with time zone NOT NULL,
+    CONSTRAINT meeting_pkey PRIMARY KEY (mit_id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.meeting
+    OWNER to postgres;
+
+
+
+-- Table: public.student_meeting
+
+-- DROP TABLE public.student_meeting;
+
+CREATE TABLE public.student_meeting
+(
+    mit_id integer NOT NULL,
+    st_id integer NOT NULL,
+    CONSTRAINT student_meeting_pkey PRIMARY KEY (mit_id, st_id),
+    CONSTRAINT mit_fk FOREIGN KEY (mit_id)
+        REFERENCES public.meeting (mit_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT mit_fk2 FOREIGN KEY (st_id)
+        REFERENCES public.student (st_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.student_meeting
     OWNER to postgres;

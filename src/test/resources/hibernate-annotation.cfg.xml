@@ -21,6 +21,8 @@
         <mapping class="com.educacionit.hibernate.beginners.entity.ProductAnnotation"  />
         <mapping class="com.educacionit.hibernate.beginners.entity.ProductTypeAnnotation"   />
         <mapping class="com.educacionit.hibernate.beginners.entity.ProductDetailAnnotation" />
+        <mapping class="com.educacionit.hibernate.beginners.entity.StudentAnnotation" />
+        <mapping class="com.educacionit.hibernate.beginners.entity.MeetingAnnotation" />
 
 	</session-factory>
 
