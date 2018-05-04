@@ -13,7 +13,7 @@ public class ProductAnnotation {
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO, generator = "product_seq")
     @SequenceGenerator (name="product_seq", sequenceName="product_seq")
-    @Column(name = "pro_id")
+    @Column(name = "pro_id", unique = true, nullable = false)
     private Long id;
 
     @Column (name="pro_name", length = 48, nullable = false)
@@ -28,6 +28,10 @@ public class ProductAnnotation {
     @OneToOne (mappedBy="product", cascade=CascadeType.ALL)
     private ProductDetailAnnotation detail;
 
+    @ManyToOne
+    @JoinColumn (name="prot_id")
+    private ProductTypeAnnotation type;
+
 
     public ProductAnnotation () {
 
@@ -41,6 +45,17 @@ public class ProductAnnotation {
         this.name = name;
         this.description = description;
         this.price  = price;
+    }
+
+    public ProductAnnotation (String name, String description, Long price,
+                              ProductTypeAnnotation type) {
+
+        super ();
+
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.type  = type;
     }
 
 
@@ -92,5 +107,15 @@ public class ProductAnnotation {
     public void setDetail (ProductDetailAnnotation detail) {
 
         this.detail = detail;
+    }
+
+    public ProductTypeAnnotation getType () {
+
+        return this.type;
+    }
+
+    public void setType (ProductTypeAnnotation type) {
+
+        this.type = type;
     }
 }

@@ -3,7 +3,11 @@ package com.educacionit.hibernate.beginners.entity;
 
 
 import java.util.Date;
+
 import javax.persistence.*;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 
 @Entity (name = "ProductDetail")
@@ -12,9 +16,9 @@ public class ProductDetailAnnotation {
 
 
     @Id
-    @GeneratedValue (strategy = GenerationType.AUTO, generator = "product_detail_seq")
-    @SequenceGenerator (name="product_detail_seq", sequenceName="product_detail_seq")
-    @Column(name = "prod_id")
+    @GeneratedValue (generator = "gen")
+    @GenericGenerator (name="gen", strategy="foreign", parameters=@Parameter(name="property", value="product"))
+    @Column (name = "pro_id", unique = true, nullable = false)
     private Long id;
 
     @Column (name="prod_tax", nullable = false)

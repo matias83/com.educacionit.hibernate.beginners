@@ -1,13 +1,13 @@
 -- Postgresql 9.6
 
-CREATE SEQUENCE public.product_detail_seq
+CREATE SEQUENCE public.product_type_seq
     INCREMENT 1
     START 1
     MINVALUE 1
     MAXVALUE 9223372036854775807
     CACHE 1;
 
-ALTER SEQUENCE public.product_detail_seq
+ALTER SEQUENCE public.product_type_seq
     OWNER TO postgres;
 
 CREATE SEQUENCE public.product_seq
@@ -351,7 +351,12 @@ CREATE TABLE public.product
     pro_name character varying(48) COLLATE pg_catalog."default" NOT NULL,
     pro_description character varying(200) COLLATE pg_catalog."default" NOT NULL,
     pro_price integer NOT NULL,
-    CONSTRAINT product_pkey PRIMARY KEY (pro_id)
+    prot_id integer NOT NULL,
+    CONSTRAINT product_pkey PRIMARY KEY (pro_id),
+    CONSTRAINT fk_to_type FOREIGN KEY (prot_id)
+        REFERENCES public.product_type (prot_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
 )
 WITH (
     OIDS = FALSE
@@ -361,13 +366,15 @@ TABLESPACE pg_default;
 ALTER TABLE public.product
     OWNER to postgres;
 
+
+
 -- Table: public.product_detail
 
 -- DROP TABLE public.product_detail;
 
 CREATE TABLE public.product_detail
 (
-    prod_id integer NOT NULL,
+    pro_id integer NOT NULL,
     prod_tax integer NOT NULL,
     prod_in time with time zone NOT NULL,
     prod_out time with time zone,
@@ -380,4 +387,24 @@ WITH (
 TABLESPACE pg_default;
 
 ALTER TABLE public.product_detail
+    OWNER to postgres;
+
+
+
+-- Table: public.product_type
+
+-- DROP TABLE public.product_type;
+
+CREATE TABLE public.product_type
+(
+    prot_id integer NOT NULL,
+    prot_name character varying(48) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT product_type_pkey PRIMARY KEY (prot_id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.product_type
     OWNER to postgres;
