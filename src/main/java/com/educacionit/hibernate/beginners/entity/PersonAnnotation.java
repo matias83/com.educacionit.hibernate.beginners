@@ -14,8 +14,8 @@ public class PersonAnnotation {
 
 
     @Id
-    @GeneratedValue (strategy = GenerationType.AUTO, generator = "seq_entity")
-    @SequenceGenerator (name="seq_entity", sequenceName="seq_entity")
+    @GeneratedValue (strategy = GenerationType.AUTO, generator = "sq_entity")
+    @SequenceGenerator (name="sq_entity", sequenceName="sq_entity")
     @Column (name = "ent_id")
     private Long personId;
 
