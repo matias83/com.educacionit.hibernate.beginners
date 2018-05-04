@@ -409,7 +409,7 @@ CREATE TABLE public.product_detail
     prod_in time with time zone NOT NULL,
     prod_out time with time zone,
     prod_observation character varying (200) COLLATE pg_catalog."default" NOT NULL,
-    CONSTRAINT product_detail_pkey PRIMARY KEY (prod_id)
+    CONSTRAINT product_detail_pkey PRIMARY KEY (pro_id)
 )
 WITH (
     OIDS = FALSE
