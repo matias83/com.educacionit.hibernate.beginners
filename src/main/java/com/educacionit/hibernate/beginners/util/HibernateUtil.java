@@ -26,6 +26,8 @@ public final class HibernateUtil {
 
     private static SessionFactory sessionHierarchyConfigFactory;
 
+    private static SessionFactory sessionAnnotationFactoryMySql;
+
     private static final Logger logger = LoggerFactory.getLogger (HibernateUtil.class);
 
 
@@ -137,6 +139,29 @@ public final class HibernateUtil {
         }
     }
 
+    private static SessionFactory buildSessionAnnotationFactoryMySql () {
+
+        try {
+
+            Configuration configuration = new Configuration ();
+            configuration.configure ("hibernate-mysql-annotation.cfg.xml");
+            logger.debug ("Hibernate Annotation MySQL Configuration loaded...");
+
+            ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder ().
+                    applySettings (configuration.getProperties ()).build ();
+            logger.debug ("Hibernate Annotation MySQL serviceRegistry created...");
+
+            SessionFactory sessionFactory = configuration.buildSessionFactory (serviceRegistry);
+
+            return sessionFactory;
+        }
+        catch (Throwable ex) {
+
+            logger.error ("Initial SessionFactory creation failed.", ex);
+            throw new ExceptionInInitializerError (ex);
+        }
+    }
+
 
 
 	public static SessionFactory getSessionFactory () {
@@ -161,5 +186,11 @@ public final class HibernateUtil {
 
         if (sessionHierarchyConfigFactory == null) { sessionHierarchyConfigFactory = buildSessionHierarchyAnnotationFactory (); }
         return sessionHierarchyConfigFactory;
+    }
+
+    public static SessionFactory getSessionAnnotationFactoryMySql () {
+
+        if (sessionAnnotationFactoryMySql == null) { sessionAnnotationFactoryMySql = buildSessionAnnotationFactoryMySql (); }
+        return sessionAnnotationFactoryMySql;
     }
 }
