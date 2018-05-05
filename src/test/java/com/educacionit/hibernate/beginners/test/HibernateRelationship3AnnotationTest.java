@@ -2,7 +2,6 @@
 package com.educacionit.hibernate.beginners.test;
 
 
-import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -75,13 +74,17 @@ public class HibernateRelationship3AnnotationTest {
             CategoryAnnotation c4 = new CategoryAnnotation ("Games", "Games");
             c4.setCategory (c);
 
+            CategoryAnnotation c5 = new CategoryAnnotation ("Action Games", "Action Games");
+            c5.setCategory (c4);
+
             // Save the data.
             logger.info (String.format ("Saving values..."));
             session.save (c);
-            session.save (c);
+            session.save (c1);
             session.save (c2);
             session.save (c3);
             session.save (c4);
+            session.save (c5);
             logger.info (String.format ("Value %s saved!", c.getName ()));
 
             tx.commit ();
@@ -115,7 +118,7 @@ public class HibernateRelationship3AnnotationTest {
 
             logger.info ("Print all students info.");
             categories.forEach ( e -> logger.info (String.format ("Category %s has (%s) sub category",
-                    e.getName (), (e.getCategory () != null ? e.getCategory ().getName () : "")))
+                    e.getName (), (e.getCategory () != null ? e.getCategory ().getName () : "Without Parent!")))
             );
 
         } catch (Exception e) {
@@ -146,7 +149,7 @@ public class HibernateRelationship3AnnotationTest {
             values.forEach (e -> session.delete (e));
             tx.commit ();
 
-            values = (List)session.createQuery("From Meeting").list ();
+            values = (List)session.createQuery("From Category").list ();
             Assertions.assertTrue (values.isEmpty (), "There are categories found!!!");
 
         } catch (Exception e) {
