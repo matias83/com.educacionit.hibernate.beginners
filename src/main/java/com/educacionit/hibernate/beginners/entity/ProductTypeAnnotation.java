@@ -2,6 +2,8 @@
 package com.educacionit.hibernate.beginners.entity;
 
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 
 
@@ -18,6 +20,9 @@ public class ProductTypeAnnotation {
 
     @Column (name="prot_name", length = 48, nullable = false)
     private String name;
+
+    @OneToMany (mappedBy = "type")
+    private Set<ProductAnnotation> products = new HashSet<> ();
 
 
     public ProductTypeAnnotation () {
@@ -51,5 +56,15 @@ public class ProductTypeAnnotation {
     public void setName (String name) {
 
         this.name = name;
+    }
+
+    public Set<ProductAnnotation> getProducts () {
+
+        return this.products;
+    }
+
+    public void setProducts (Set<ProductAnnotation> products) {
+
+        this.products = products;
     }
 }
